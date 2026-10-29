@@ -1,0 +1,60 @@
+import numpy as np, pandas as pd, matplotlib.pyplot as plt
+from figstyle import *
+style()
+L=np.load('raw/lead_mat.npy'); F=np.load('raw/fp_mat.npy'); TH=np.array(range(50,245,5))
+lm=np.nanmedian(L,0); nt=(F==1).sum(0); el=((F==1)|(F==0)).sum(0); fpr=100*nt/el; raw=100*(F!=0).sum(0)/F.shape[0]
+tp=(L>0).sum(0); ppv=100*tp/(tp+nt)
+pd.DataFrame({'T':TH,'lead_med':lm,'fpr_corr':fpr,'fpr_raw':raw,'tp_lead_gt0':tp,'fp':nt,'ppv':ppv}).to_csv('raw/threshold_grid_full.csv',index=False)
+fig=plt.figure(figsize=(7.2,4.9))
+a=fig.add_axes([0.08,0.56,0.40,0.36]); b=fig.add_axes([0.08,0.09,0.40,0.36]); c=fig.add_axes([0.60,0.09,0.38,0.83])
+for ax in (a,b):
+    ax.axvspan(100,150,color=GRID,alpha=0.8,lw=0,zorder=0); ax.axvspan(125,175,color=BLUE,alpha=0.08,lw=0,zorder=0)
+    ax.axvline(187.5,color=INK2,lw=0.8,ls='--')
+    ax.set_xlim(50,240)
+a.plot(TH,lm,color=BLUE,lw=1.8); a.set_ylabel('Median lead time (yr)'); a.set_ylim(0,5.3)
+a.text(125,4.95,'100–150 band',ha='center',fontsize=6.3,color=INK2)
+a.text(150,0.25,'elbow: bootstrap\n90% interval 125–175',fontsize=6,color=BLUE,ha='center')
+a.text(189,3.2,'EU GWD trend-reversal\nstarting point: 75% of\nstandard = 187.5',fontsize=6,color=INK2)
+a.set_xticklabels([])
+panel(a,'a','Lead time gained by a lower warning threshold')
+b.plot(TH,fpr,color=ORANGE,lw=1.8,label='False-positive rate (stable wells, censoring-corrected)')
+b.plot(TH,ppv,color=NAVY,lw=1.6,ls='-.',label='Positive predictive value (alarms followed by a transition)')
+b.set_ylabel('Percent'); b.set_ylim(0,100); b.set_xlabel('Warning threshold T (mg L$^{-1}$)'); b.legend(loc='upper right',fontsize=6)
+for T in (100,150,200):
+    j=list(TH).index(T); b.scatter([T],[fpr[j]],s=14,c=ORANGE,zorder=3); b.text(T+3,fpr[j]+3,f'{fpr[j]:.1f}%',ha='center',fontsize=6,color=INK)
+panel(b,'b','False alarms and alarm reliability')
+sc=c.scatter(fpr,lm,c=TH,cmap='viridis',s=26,ec='white',lw=0.4,zorder=3)
+c.plot(fpr,lm,color=MUTED,lw=0.8,zorder=2)
+for T in (100,125,150,175,200):
+    j=list(TH).index(T); c.annotate(f'{T} mg L$^{{-1}}$: {lm[j]:.1f} yr, {fpr[j]:.1f}%',(fpr[j],lm[j]),xytext=(8,-3),textcoords='offset points',fontsize=6.3,color=INK)
+c.set_xlabel('False-positive rate (%)'); c.set_ylabel('Median lead time (yr)'); c.set_xlim(0,40); c.set_ylim(0,5.3)
+cb=plt.colorbar(sc,ax=c,fraction=0.05,pad=0.02); cb.set_label('Threshold (mg L$^{-1}$)',fontsize=7); cb.ax.tick_params(labelsize=6)
+panel(c,'c','Decision frontier')
+save(fig,'Fig5_tradeoff')
+# ---------------- Fig 6 counterfactual (submitted implementation; denominator = 145 transitions)
+fig,(a,b)=plt.subplots(1,2,figsize=(7.2,2.9)); fig.subplots_adjust(wspace=0.35,left=0.08,right=0.98,bottom=0.17,top=0.86)
+fx=[1,2,4]; labs=['Annual','Semi-annual','Quarterly']
+a.plot(fx,[2.07,2.04,1.68],'-o',color=BLUE,label='T = 150 mg L$^{-1}$'); a.plot([2,4],[2.57,2.62],'--s',color=NAVY,label='T = 100 mg L$^{-1}$')
+a.set_xticks(fx); a.set_xticklabels(labs); a.set_ylim(0,3.2); a.set_ylabel('Median lead time (yr)'); a.legend(loc='lower left',fontsize=6.5)
+panel(a,'a','Threshold sets the depth of warning')
+b.plot(fx,[115,128,140],'-o',color=BLUE,label='T = 150 mg L$^{-1}$'); b.plot([2,4],[130,140],'--s',color=NAVY,label='T = 100 mg L$^{-1}$')
+b.axhline(145,color=MUTED,lw=0.8,ls=':'); b.text(1.05,145.8,'all 145 transitions (5 cannot be simulated: <4 sampling dates)',fontsize=6.0,color=INK2)
+b.set_xticks(fx); b.set_xticklabels(labs); b.set_ylim(105,149); b.set_ylabel('Transitions detected (of 145)'); b.legend(loc='lower right',fontsize=6.5)
+panel(b,'b','Frequency sets the breadth (coverage)')
+save(fig,'Fig6_counterfactual')
+# ---------------- Fig 7 robustness
+loso={'FL':2.83,'GA':2.21,'LA':1.82,'CA':2.00,'NY':2.39,'MD':1.99,'MA':2.43,'TX':2.00}   # knee_loso_original.py
+cov=[('Sampling interval',0.404,True),('Baseline chloride',0.265,True),('Well depth',0.217,True),('Water-level depth',0.167,False),('Altitude',0.059,False),('Distance to coast',-0.026,False)]
+fig,(a,b,c)=plt.subplots(1,3,figsize=(7.2,2.7)); fig.subplots_adjust(wspace=0.75,left=0.07,right=0.99,bottom=0.17,top=0.85)
+Tt=[100,125,150,175,200]; rawv=[22.8,17.0,12.5,8.1,5.3]; corv=[17.6,13.3,9.9,6.5,4.1]
+a.plot(Tt,rawv,'-o',color=GREY,label='Raw'); a.plot(Tt,corv,'-s',color=ORANGE,label='Censoring-corrected')
+a.set_xlabel('Warning threshold (mg L$^{-1}$)'); a.set_ylabel('False-positive rate (%)'); a.legend(fontsize=6.3); panel(a,'a','Censoring correction')
+ks=list(loso); b.barh(range(len(ks))[::-1],[loso[k] for k in ks],color=BLUE,height=0.6)
+b.axvline(2.03,color=ORANGE,ls='--',lw=1); b.set_yticks(range(len(ks))[::-1]); b.set_yticklabels(['– '+k for k in ks]); b.set_xlim(0,3.1)
+b.set_xlabel('Pooled median lead at 150 (yr)'); b.text(2.08,7.4,'all wells 2.03',fontsize=6,color=ORANGE); panel(b,'b','Leave-one-state-out')
+c.barh(range(len(cov))[::-1],[v for _,v,_ in cov],color=[ORANGE if s else GREY for *_,s in cov],height=0.6)
+c.set_yticks(range(len(cov))[::-1]); c.set_yticklabels([n for n,_,_ in cov]); c.axvline(0,color=INK2,lw=0.6)
+for y,(n,v,s) in zip(range(len(cov))[::-1],cov): c.text(v+0.015 if v>=0 else v-0.015,y,'*' if s else 'n.s.',va='center',ha='left' if v>=0 else 'right',fontsize=6.3)
+c.set_xlim(-0.15,0.5); c.set_xlabel('Spearman ρ with lead time'); panel(c,'c','Covariate associations')
+save(fig,'Fig7_robustness')
+print('ok')

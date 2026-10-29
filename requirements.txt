@@ -1,0 +1,10 @@
+numpy==2.5.3
+pandas==3.0.5
+scipy==1.18.1
+matplotlib==3.11.2
+pyarrow==26.0.0
+statsmodels==0.15.0
+requests==2.34.2
+shapely==2.2.0
+pyproj==3.8.0
+global-land-mask==1.0.0

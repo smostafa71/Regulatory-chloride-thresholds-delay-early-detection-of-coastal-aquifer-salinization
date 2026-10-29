@@ -1,0 +1,578 @@
+{
+  "data": {
+    "rows": 218181,
+    "wells": 44990,
+    "states": 17,
+    "start": "1980-01-01",
+    "end": "2026-04-16",
+    "eligible_ge20": 2139,
+    "short": 42851,
+    "transitions": 145,
+    "fresh_noisy": 1465,
+    "always_saline": 529,
+    "stable_controls": 1439,
+    "other_fresh_noisy": 26,
+    "states_with_transitions": 12,
+    "nwis_meta": 135,
+    "nwis_depth": 133,
+    "depth_any": 135,
+    "coords_all": 145,
+    "wl_wells": 100
+  },
+  "wells": {
+    "n_samples_med": 41,
+    "n_samples_iqr": [
+      26,
+      76
+    ],
+    "n_min": 20,
+    "span_med": 20.0,
+    "span_iqr": [
+      10.0,
+      31.2
+    ],
+    "interval_med_yr": 0.25,
+    "interval_med_days": 92.5,
+    "interval_iqr_yr": [
+      0.09,
+      0.51
+    ],
+    "interval_cv_med": 0.7,
+    "max_gap_med_yr": 1.6,
+    "npre_med": 18,
+    "npre_iqr": [
+      8,
+      31
+    ],
+    "npre_lt8": 36,
+    "ews_set_ge8": 108,
+    "prespan_med": 7.0,
+    "post_med": 8.5,
+    "isolated_pre250": 54,
+    "lead0": 33,
+    "left_censored150": 48,
+    "uncensored150": 97,
+    "first_ge150": 56,
+    "year250_med": 1993,
+    "year250_iqr": [
+      1986,
+      2007
+    ],
+    "baseline_med": 140,
+    "depth_med_ft": 226,
+    "depth_iqr_ft": [
+      113,
+      706
+    ],
+    "coast_med_km": 5.3,
+    "coast_iqr_km": [
+      2.0,
+      32.8
+    ],
+    "coast_le10": 84,
+    "coast_10_50": 30,
+    "coast_gt50": 31
+  },
+  "repr": {
+    "T_n": 41,
+    "S_n": 29,
+    "T_span": 20.0,
+    "S_span": 11.2,
+    "T_int": 0.25,
+    "S_int": 0.25,
+    "p_int": 0.61,
+    "T_depth": 226,
+    "S_depth": 160,
+    "T_km": 5.3,
+    "S_km": 17.4,
+    "T_first": 1983,
+    "S_first": 1989
+  },
+  "mech": {
+    "M1": [
+      68,
+      1.86
+    ],
+    "M2": [
+      39,
+      2.83
+    ],
+    "M3": [
+      11,
+      6.63
+    ],
+    "M4": [
+      27,
+      1.01
+    ],
+    "KW_p": 0.19,
+    "lith_KW_p": 0.95,
+    "lith_KW_p_note": "three classes with >=3 wells (karst, mixed, clastic); 0.28 including the two fractured-rock wells",
+    "lith_KW_p_all4": 0.28
+  },
+  "coastal": {
+    "le10": [
+      84,
+      2.01,
+      12.0
+    ],
+    "le25": [
+      100,
+      2.01,
+      11.9
+    ],
+    "le50": [
+      114,
+      2.02,
+      11.3
+    ],
+    "exclM4": [
+      118,
+      2.44,
+      9.9
+    ],
+    "M1only": [
+      68,
+      1.86,
+      12.1
+    ]
+  },
+  "ews": {
+    "single_draw_p": 0.136,
+    "single_draw_delta": 0.086,
+    "draws": 1000,
+    "raw_p_med": 0.038,
+    "raw_p_iqr": [
+      0.014,
+      0.1
+    ],
+    "raw_frac_sig": 0.58,
+    "raw_delta_med": 0.14,
+    "det_p_med": 0.074,
+    "det_p_iqr": [
+      0.028,
+      0.151
+    ],
+    "det_frac_sig": 0.39,
+    "det_delta_med": 0.114,
+    "auc_raw": 0.57,
+    "auc_det": 0.56,
+    "tau_within_logratio": 0.38,
+    "tau_within_p": 0.035,
+    "tau_vs_ctrl_p_raw": 0.091,
+    "tau_vs_ctrl_p_det": 0.053,
+    "tau_delta_raw": 0.106,
+    "tau_delta_det": 0.129,
+    "cv_p_med": 0.454,
+    "cv_delta": 0.009,
+    "var_det_delta": 0.271,
+    "logsd_delta": 0.041,
+    "logsd_p": 0.303,
+    "mean_sd_rho": 0.63,
+    "power_range": [
+      37,
+      96
+    ],
+    "achievable_delta": [
+      0.1,
+      0.27
+    ],
+    "achievable_auc_max": 0.64
+  },
+  "roc": {
+    "auc_gt0": 0.89,
+    "auc_gt1": 0.78,
+    "auc_gt2": 0.74,
+    "tpr150_gt0": 0.77,
+    "tpr150_gt2": 0.5
+  },
+  "wl": {
+    "rho": 0.167,
+    "p": 0.097,
+    "n": 100,
+    "defs": 12,
+    "p_range": [
+      0.17,
+      0.98
+    ],
+    "n_range": [
+      65,
+      82
+    ],
+    "median_within_ft": 0.2,
+    "original_file": "raw/waterlevels_transition.csv identical results with the archived June 2026 file"
+  },
+  "curv": {
+    "n": 82,
+    "pos_pct": 65,
+    "median": 0.25,
+    "p": 0.004,
+    "g50": [
+      27,
+      85,
+      0.62,
+      0.0002
+    ],
+    "g50_150": [
+      26,
+      62,
+      0.31,
+      0.036
+    ],
+    "g150": [
+      29,
+      48,
+      -0.07,
+      0.78
+    ],
+    "density_p": 0.26,
+    "Ftest_sig": 49
+  },
+  "pred": {
+    "n": 34,
+    "rho_curv": [
+      -0.24,
+      0.18
+    ],
+    "rho_slope": [
+      -0.01,
+      0.96
+    ],
+    "rho_recent": [
+      0.1,
+      0.57
+    ],
+    "alt8": 38,
+    "alt6": 41,
+    "nominal": [
+      0.32,
+      0.039
+    ],
+    "bonf": 0.0056,
+    "rem_med": 2.75,
+    "naive_mae": [
+      2.2,
+      1.9,
+      3.1
+    ],
+    "loc4_mae": [
+      1.5,
+      0.5,
+      3.3
+    ],
+    "w2_mae": 2.8,
+    "quad_mae": [
+      2.9,
+      31
+    ],
+    "last_mae": 9.0,
+    "full_mae": [
+      15.4,
+      8.2,
+      27.5,
+      32
+    ],
+    "sen_mae": 23.7,
+    "full_bias": 15.4,
+    "full_within1": 6,
+    "full_rho": -0.03,
+    "paired_p_local": [
+      0.26,
+      0.96
+    ],
+    "headline_linear": {
+      "method": "full-history rate applied from latest concentration",
+      "mae": 9.0,
+      "n": 32,
+      "within1": 6,
+      "bias": 8.4,
+      "original_submission": "8.6 yr, n=30, 7% (code not archived)"
+    },
+    "nominal_bonf_ci": [
+      -0.12,
+      0.68
+    ],
+    "nominal_ci95": [
+      0.02,
+      0.58
+    ],
+    "nominal_ci_resamples": 20000
+  },
+  "trade": {
+    "150": [
+      2.03,
+      4.85,
+      12.5,
+      41,
+      139,
+      9.9
+    ],
+    "100": [
+      3.53,
+      6.17,
+      22.8,
+      90,
+      238,
+      17.6
+    ],
+    "125": [
+      2.83,
+      5.43,
+      17.0,
+      62,
+      183,
+      13.3
+    ],
+    "175": [
+      1.55,
+      3.94,
+      8.1,
+      25,
+      92,
+      6.5
+    ],
+    "200": [
+      0.96,
+      3.03,
+      5.3,
+      17,
+      59,
+      4.1
+    ],
+    "ppv150": 45,
+    "ppv100": 34,
+    "ppv200": 62,
+    "prevalence": 9.2,
+    "warned150": 112,
+    "eu75": 187.5,
+    "knee_operational_grid": {
+      "median": 150,
+      "ci90": [
+        125,
+        175
+      ],
+      "grid": [
+        100,
+        125,
+        150,
+        175,
+        200
+      ],
+      "resamples": 2000,
+      "script": "knee_loso_original.py",
+      "full_sample_point": 175
+    },
+    "knee_fine_grid": {
+      "point": 105,
+      "ci90": [
+        85,
+        145
+      ],
+      "note": "sensitivity, full 50-240 grid (Table S3 note)"
+    },
+    "alarms_per_100_wells": 20.5,
+    "ppv_all_alarms": 44.6,
+    "fp_followup_window": {
+      "3yr": {
+        "100": 20.1,
+        "150": 10.9,
+        "200": 4.7
+      },
+      "5yr": {
+        "100": 17.6,
+        "150": 9.9,
+        "200": 4.1
+      },
+      "7yr": {
+        "100": 16.9,
+        "150": 9.5,
+        "200": 3.7
+      },
+      "script": "fp_followup_window.py"
+    }
+  },
+  "censor": {
+    "km_median": 4.3,
+    "km_ci": [
+      2.0,
+      7.1
+    ]
+  },
+  "subsets": {
+    "int_le1": [
+      139,
+      1.97
+    ],
+    "npre_ge10": [
+      99,
+      4.31
+    ],
+    "prespan_ge5": [
+      86,
+      6.6
+    ],
+    "year_ge1990": [
+      94,
+      4.38
+    ]
+  },
+  "persist3": {
+    "transitions": 122,
+    "lead150": 2.98,
+    "fp150": 10.1,
+    "lead100": 4.82,
+    "fp100": 17.5,
+    "lead200": 0.95,
+    "fp200": 4.2
+  },
+  "qa": {
+    "daily": [
+      134,
+      2.49,
+      10.0
+    ],
+    "qa_keep": [
+      131,
+      2.49,
+      10.1
+    ],
+    "qa_full": [
+      123,
+      2.36,
+      9.7
+    ],
+    "qa_nodaily": [
+      143,
+      2.0,
+      10.1
+    ]
+  },
+  "cf": {
+    "ref_wells": 140,
+    "excluded_lt4dates": 5,
+    "annual150": [
+      115,
+      2.07,
+      8.8
+    ],
+    "semi150": [
+      128,
+      2.04,
+      9.3
+    ],
+    "quart150": [
+      140,
+      1.68,
+      9.4
+    ],
+    "semi100": [
+      130,
+      2.57,
+      17.2
+    ],
+    "quart100": [
+      140,
+      2.62,
+      17.5
+    ],
+    "annual250": [
+      81,
+      0.0
+    ],
+    "strict_annual150": [
+      99,
+      2.9,
+      9.4
+    ],
+    "strict_semi150": [
+      111,
+      2.95,
+      9.8
+    ],
+    "strict_quart150": [
+      119,
+      2.48,
+      9.9
+    ],
+    "strict_semi100": [
+      120,
+      3.75,
+      17.6
+    ],
+    "strict_quart100": [
+      123,
+      3.75,
+      17.8
+    ],
+    "strict_annual250": 6,
+    "denominator": 145
+  },
+  "loso": {
+    "CA": 2.0,
+    "FL": 2.83,
+    "GA": 2.21,
+    "LA": 1.82,
+    "MA": 2.43,
+    "MD": 1.99,
+    "NY": 2.39,
+    "TX": 2.0,
+    "range": [
+      1.82,
+      2.83
+    ],
+    "source": "raw/transition_events_original.csv (knee_loso_original.py)"
+  },
+  "watch": {
+    "n": 169,
+    "of": 9415,
+    "pct": 1.8,
+    "le10": 55,
+    "10_50": 56,
+    "gt50": 58,
+    "since2020": [
+      113,
+      5038
+    ]
+  },
+  "covariates": {
+    "source": "per-well event table (transition_events_original.csv); covariate_models.py",
+    "rho_baseline": [
+      0.265,
+      0.0013
+    ],
+    "rho_interval": 0.404,
+    "rho_depth": [
+      0.217,
+      0.012,
+      133
+    ],
+    "rho_raster_km": [
+      -0.026,
+      0.78,
+      122
+    ],
+    "rho_geodesic_km": [
+      -0.02,
+      0.81,
+      145
+    ],
+    "models_km_p": {
+      "Model 1": 0.006,
+      "Model 2": 0.044,
+      "Model 3": 0.098,
+      "Model 4": 0.016,
+      "Model 5": 0.53
+    },
+    "depth_partial": [
+      0.22,
+      0.011
+    ],
+    "depth_models_p": [
+      0.25,
+      0.22,
+      0.033
+    ]
+  },
+  "forecast_note": "negative remaining-time forecasts (one well, linear rate, latest value >250) counted as zero; values unchanged",
+  "abstract_words": 248
+}
